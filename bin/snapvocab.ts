@@ -4,4 +4,10 @@ import * as cdk from '@aws-cdk/core';
 import { SnapvocabStack } from '../lib/snapvocab-stack';
 
 const app = new cdk.App();
-new SnapvocabStack(app, 'SnapvocabStack');
+new SnapvocabStack(app, 'SnapvocabStack', {
+  env: {
+    account: app.node.tryGetContext("account"),
+    region: app.node.tryGetContext("region"),
+  },
+  domainName: "snapvocab.com"
+});

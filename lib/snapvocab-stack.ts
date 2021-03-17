@@ -9,7 +9,8 @@ import path = require('path')
 
 
 export interface SnapVocabProps extends cdk.StackProps {
-  domainName: string
+  domainName: string,
+  gatewayDomainName: string,
 }
 
 export class SnapvocabStack extends cdk.Stack {
@@ -42,6 +43,7 @@ export class SnapvocabStack extends cdk.Stack {
     // TLS certificate
     const certificateArn = new acm.DnsValidatedCertificate(this, "SiteCertificate", {
         domainName: props.domainName,
+        subjectAlternativeNames: ["*." + props.domainName],
         hostedZone: zone,
         region: "us-east-1", // Cloudfront only checks this region for certificates.
       }
@@ -61,6 +63,25 @@ export class SnapvocabStack extends cdk.Stack {
         },
         originConfigs: [
           {
+            // the backend origin must be the first in the originConfigs list so it takes precedence over the S3 origin
+            customOriginSource: {
+              domainName: props.gatewayDomainName,
+            },
+            behaviors: [
+              {
+                pathPattern: "/Prod/*", // CloudFront will forward `/Prod/*` to the backend so make sure all your routes are prepended with `/Prod/`
+                allowedMethods: cloudfront.CloudFrontAllowedMethods.ALL,
+                minTtl: cdk.Duration.seconds(0),
+                maxTtl: cdk.Duration.seconds(0),
+                defaultTtl: cdk.Duration.seconds(0),
+                forwardedValues: {
+                  queryString: true,
+                  headers: ["Authorization", "Accept", "Referer"], // By default CloudFront will not forward any headers through so if your API needs authentication make sure you forward auth headers across
+                },
+              },
+            ],
+          },
+          {
             customOriginSource: {
               domainName: siteBucket.bucketWebsiteDomainName,
               originProtocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY,
@@ -68,6 +89,14 @@ export class SnapvocabStack extends cdk.Stack {
             behaviors: [{ isDefaultBehavior: true }],
           },
         ],
+        errorConfigurations: [
+          {
+            errorCode: 404,
+            errorCachingMinTtl: 0,
+            responsePagePath: "/index.html",
+            responseCode: 200,
+          }
+        ]
       }
     )
     new cdk.CfnOutput(this, "DistributionId", {

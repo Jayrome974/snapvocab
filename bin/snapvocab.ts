@@ -9,5 +9,6 @@ new SnapvocabStack(app, 'SnapvocabStack', {
     account: app.node.tryGetContext("account"),
     region: app.node.tryGetContext("region"),
   },
-  domainName: "snapvocab.com"
+  domainName: "snapvocab.com",
+  gatewayDomainName: "bkfiqwa7w0.execute-api.ca-central-1.amazonaws.com"
 });

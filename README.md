@@ -9,7 +9,7 @@ https://snapvocab.com
 
 Infrastructure as Code Tool : AWS CDK + AWS Serverless Application Model
 
-Note: containers stack architecture is available [here](https://github.com/Jayrome974/learnusefulwords).
+Note: containers stack architecture - learning purposes only - is available [here](https://github.com/Jayrome974/learnusefulwords).
 
 ## Modules
 * Static WebContent: Vue.js 3, JavaScript, Mobile Responsive, OAuthClient

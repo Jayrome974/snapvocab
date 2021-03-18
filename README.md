@@ -1,14 +1,25 @@
-# Welcome to your CDK TypeScript project!
+# SnapVocab
+SnapVocab helps language students learning words that are most useful to them
 
-This is a blank project for TypeScript development with CDK.
+## URL
+https://snapvocab.com
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Application Architecture - Serverless Stack - Production Environment
+![application_architecture](/misc/application_architecture_serverless.png)
+Infrastructure as Code Tool : AWS CDK + AWS Serverless Application Model
 
-## Useful commands
+Note: the application architecure based on containers is available [here](https://github.com/Jayrome974/learnusefulwords)
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+## Modules
+### Serverless Stack
+* Static WebContent : Vue.js 3, JavaScript, Mobile Responsive, OAuthClient
+* Mobile APP : iOS, Swift 5, Cocoapods, UIkit, Storyboard, OAuthClient
+* Serverless Stack : Lambda, REST API, DynamoDB, Java 11
+
+## Screenshots
+* Website
+![snapvocab_webiste_screenshot](/misc/snapvocab_website.png)
+
+* iOS APP
+
+![snapvocab_ios_screenshot](/misc/snapvocab_ios.png)

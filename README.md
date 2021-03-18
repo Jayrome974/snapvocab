@@ -8,7 +8,7 @@ https://snapvocab.com
 ![application_architecture](/misc/application_architecture_serverless.png)
 Infrastructure as Code Tool : AWS CDK + AWS Serverless Application Model
 
-Note: the application architecure based on containers is available [here](https://github.com/Jayrome974/learnusefulwords)
+Note: containers stack architecture is available [here](https://github.com/Jayrome974/learnusefulwords).
 
 ## Modules
 ### Serverless Stack

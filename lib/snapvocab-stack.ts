@@ -25,6 +25,16 @@ export class SnapvocabStack extends cdk.Stack {
       value: "https://" + props.domainName
     })
 
+    // TLS certificate
+    const certificateArn = new acm.DnsValidatedCertificate(this, "SiteCertificate", {
+        domainName: props.domainName,
+        subjectAlternativeNames: ["*." + props.domainName],
+        hostedZone: zone,
+        region: "us-east-1", // Cloudfront only checks this region for certificates.
+      }
+    ).certificateArn
+    new cdk.CfnOutput(this, "Certificate", { value: certificateArn })
+
     // Content bucket
     const siteBucket = new s3.Bucket(this, "SiteBucket", {
       bucketName: props.domainName,
@@ -39,16 +49,6 @@ export class SnapvocabStack extends cdk.Stack {
       // autoDeleteObjects: true
     })
     new cdk.CfnOutput(this, "Bucket", { value: siteBucket.bucketName })
-
-    // TLS certificate
-    const certificateArn = new acm.DnsValidatedCertificate(this, "SiteCertificate", {
-        domainName: props.domainName,
-        subjectAlternativeNames: ["*." + props.domainName],
-        hostedZone: zone,
-        region: "us-east-1", // Cloudfront only checks this region for certificates.
-      }
-    ).certificateArn
-    new cdk.CfnOutput(this, "Certificate", { value: certificateArn })
 
     // CloudFront distribution that provides HTTPS
     const distribution = new cloudfront.CloudFrontWebDistribution(

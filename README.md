@@ -48,10 +48,10 @@ Note: containers stack architecture - learning purposes only - is available [her
 1. Delete the word with the given ID in the library
 
 #### Add an email in the mailing list
-* Input : an email
+* Input : an email + a CSRF token
 * Output : N/A
 * Primary Course : 
-1. Validate the email
+1. Validate the email and the CSRF token
 2. Create Email in the mailing list
 
 ### REST API Design
@@ -102,6 +102,7 @@ RESPONSE
 
 INPUT
 * email | string | required
+* csrfToken | string | required
 
 RESPONSE
 * Status : 200 OK

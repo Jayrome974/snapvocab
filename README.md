@@ -48,7 +48,7 @@ Note: containers stack architecture - learning purposes only - is available [her
 1. Delete the word with the given ID in the library
 
 #### Add an email in the mailing list
-* Input : an email + a CSRF token
+* Input : an email
 * Output : N/A
 * Primary Course : 
 1. Validate the email and the CSRF token

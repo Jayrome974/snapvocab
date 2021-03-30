@@ -102,7 +102,7 @@ RESPONSE
 
 INPUT
 * email | string | required
-* csrfToken | string | required
+* csrfToken | int | required
 
 RESPONSE
 * Status : 200 OK

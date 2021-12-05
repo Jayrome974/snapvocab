@@ -6,6 +6,7 @@ https://snapvocab.com
 
 ## Application Architecture - Serverless Stack - Production Environment
 MVP 1.0: Manual Payment Workflow
+
 ![application_architecture](/misc/application_architecture_serverless.png)
 
 Infrastructure as Code Tool : AWS CDK
